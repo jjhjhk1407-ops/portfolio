@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정정현 — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #080808;
+  --bg2: #0f0f0f;
+  --white: #f2ede6;
+  --gold: #d4a843;
+  --gold2: #a07830;
+  --gray: #777;
+  --lgray: #aaa;
+  --line: #1e1e1e;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+#cursor {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease;
+}
+#cursor.big { transform: scale(5); }
+
+/* NOISE */
+body::after {
+  content:'';
+  position: fixed;
+  inset:0;
+  opacity:.035;
+  pointer-events:none;
+  z-index:9998;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── HERO ───────────────────────────────── */
+#hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -55%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 22vw, 280px);
+  color: transparent;
+  -webkit-text-stroke: 1px #1a1a1a;
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  animation: bgSlide 1.2s ease both;
+}
+
+@keyframes bgSlide {
+  from { opacity:0; transform: translate(-50%,-60%); }
+  to   { opacity:1; transform: translate(-50%,-55%); }
+}
+
+.hero-label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 32px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  animation: fadeUp .8s .1s both;
+}
+
+.hero-name {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: clamp(72px, 14vw, 180px);
+  line-height: .9;
+  letter-spacing: .02em;
+  animation: fadeUp .8s .2s both;
+}
+
+.hero-name em {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 40px;
+  animation: fadeUp .8s .35s both;
+}
+
+.hero-desc {
+  font-size: 14px;
+  color: var(--lgray);
+  line-height: 1.9;
+  max-width: 420px;
+}
+
+.hero-links {
+  display: flex;
+  gap: 20px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid #2a2a2a;
+  border-radius: 100px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  transition: all .3s;
+}
+.pill:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── NAV ───────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 28px 60px;
+  background: rgba(8,8,8,.95);
+  backdrop-filter: blur(8px);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: .1em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+
+.nav-menu {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-menu a {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color .3s;
+}
+.nav-menu a:hover { color: var(--white); }
+
+/* ── SECTIONS ───────────────────────────── */
+section { border-bottom: 1px solid var(--line); }
+
+.sec-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 60px;
+}
+
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 18px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 64px;
+}
+.sec-label::after {
+  content:'';
+  flex:1;
+  max-width:160px;
+  height:1px;
+  background: var(--line);
+}
+
+/* ── ABOUT ─────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-left h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 6vw, 88px);
+  line-height: .95;
+  letter-spacing: .02em;
+  margin-bottom: 60px;
+}
+
+.about-left h2 em {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  display: block;
+}
+
+.about-left p {
+  font-size: 14px;
+  color: var(--lgray);
+  line-height: 1.9;
+  margin-bottom: 60px;
+}
+
+.info-block {
+  border-left: 2px solid var(--gold);
+  padding-left: 20px;
+  margin-bottom: 24px;
+  margin-top: 1.5em;
+}
+.info-block h4 {
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.info-block p {
+  font-size: 13px;
+  color: var(--lgray);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.skill-tag {
+  padding: 5px 14px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--lgray);
+  transition: all .3s;
+}
+.skill-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── STAT CARDS ────────────────────────── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.stat-card {
+  background: var(--bg2);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.stat-card:hover { background: #141414; }
+.stat-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s;
+}
+.stat-card:hover::before { transform: scaleX(1); }
+
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: .02em;
+  margin-bottom: 6px;
+}
+.stat-unit { font-size: 18px; }
+.stat-desc {
+  font-size: 12px;
+  letter-spacing: .1em;
+  color: var(--gray);
+  text-transform: uppercase;
+  text-align: left;
+}
+.stat-card { text-align: left; }
+
+/* ── CHANNEL ────────────────────────────── */
+.channel-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.channel-header {
+  padding: 32px 36px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ch-info { display: flex; align-items: center; gap: 20px; }
+.ch-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.ch-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+.ch-handle { font-size: 12px; color: var(--gray); }
+
+.ch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.ch-tag {
+  font-size: 12px;
+  color: var(--gold);
+  background: rgba(212,168,67,.1);
+  border: 1px solid rgba(212,168,67,.25);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.ch-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--gold);
+  color: #000;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background .3s;
+}
+.ch-link:hover { background: #e8bc58; }
+
+.channel-body { padding: 36px; }
+.ch-desc {
+  font-size: 14px;
+  color: var(--lgray);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.video-thumb {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  background: #1a1a1a;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.video-thumb::after {
+  content: '▶';
+  position: absolute;
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.video-thumb:hover::after { opacity: 1; }
+.video-thumb:nth-child(1) { background: linear-gradient(135deg,#1a2030,#2a3050); }
+.video-thumb:nth-child(2) { background: linear-gradient(135deg,#301a1a,#502020); }
+.video-thumb:nth-child(3) { background: linear-gradient(135deg,#1a2a1a,#204020); }
+.vt-label {
+  position: absolute;
+  bottom: 10px; left: 10px;
+  font-size: 10px;
+  letter-spacing: .05em;
+  color: rgba(255,255,255,.6);
+  background: rgba(0,0,0,.5);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.work-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.work-col-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: .1em;
+  color: var(--gold);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.work-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── MODAL ───────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-box {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.modal-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  font-size: 28px;
+  color: var(--white);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+}
+.yt-thumb { cursor: pointer; }
+
+/* ── WORK ───────────────────────────────── */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.work-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform .3s, border-color .3s;
+}
+.work-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+.work-thumb {
+  aspect-ratio: 16/9;
+  background: #161616;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+}
+.work-thumb img { width:100%; height:100%; object-fit:cover; transition: transform .4s; }
+.work-thumb:hover img { transform: scale(1.05); }
+.play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px; height: 52px;
+  background: rgba(0,0,0,.7);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--white);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.work-thumb:hover .play-btn { opacity: 1; }
+.work-info { padding: 20px; }
+.work-num { font-size: 10px; color: var(--gold); letter-spacing: .2em; margin-bottom: 8px; }
+.work-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.work-meta { font-size: 12px; color: var(--gray); }
+
+/* ── STRENGTHS ──────────────────────────── */
+.strength-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.strength-card {
+  background: var(--bg2);
+  padding: 48px;
+  transition: background .3s;
+}
+.strength-card:hover { background: #111; }
+
+.s-icon { font-size: 32px; margin-bottom: 20px; }
+.s-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: .04em;
+  margin-bottom: 14px;
+}
+.s-body {
+  font-size: 13px;
+  color: var(--lgray);
+  line-height: 1.9;
+}
+
+/* ── GOAL ───────────────────────────────── */
+.goal-section {
+  background: var(--bg2);
+}
+.goal-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 60px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.goal-tag {
+  font-size: 18px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.goal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 1.5em;
+  letter-spacing: .02em;
+}
+
+.goal-body {
+  font-size: 15px;
+  color: var(--lgray);
+  line-height: 2;
+}
+.goal-body strong { color: var(--white); font-weight: 500; }
+
+.goal-quote {
+  margin-top: 36px;
+  padding: 28px 32px;
+  border-left: 3px solid var(--gold);
+  background: #141414;
+  border-radius: 0 8px 8px 0;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--white);
+  line-height: 1.7;
+}
+
+/* ── CONTACT ────────────────────────────── */
+.contact-wrap {
+  text-align: center;
+  padding: 120px 60px;
+}
+.contact-wrap h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 10vw, 140px);
+  line-height: .9;
+  letter-spacing: .02em;
+  margin-bottom: 20px;
+}
+.contact-wrap h2 em {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: var(--gold);
+}
+.contact-sub {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 48px;
+}
+.contact-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border: 1px solid #2a2a2a;
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  transition: all .3s;
+  background: transparent;
+}
+.btn:hover { border-color: var(--gold); color: var(--gold); }
+.btn.primary { background: var(--white); color: #000; border-color: var(--white); }
+.btn.primary:hover { background: var(--gold); border-color: var(--gold); }
+
+/* ── FOOTER ─────────────────────────────── */
+footer {
+  padding: 28px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+footer p {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: #333;
+}
+
+/* ── ANIMATIONS ─────────────────────────── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── MARQUEE ────────────────────────────── */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+  background: #050505;
+}
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marquee 25s linear infinite;
+  white-space: nowrap;
+}
+.m-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: .12em;
+  color: #222;
+  flex-shrink: 0;
+}
+.m-item span { color: var(--gold); margin: 0 16px; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* ── RESPONSIVE ─────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .nav-menu { gap: 20px; }
+  .nav-menu a { font-size: 10px; letter-spacing: .1em; }
+
+  #hero { padding: 100px 24px 40px; }
+  .hero-bg-text { font-size: 80px; }
+  .hero-name { font-size: 72px; }
+  .hero-label { font-size: 18px; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+
+  .sec-inner { padding: 60px 24px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .stat-row { grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .stat-card { padding: 20px; }
+  .stat-num { font-size: 36px; }
+
+  .channel-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  .work-split { grid-template-columns: 1fr; gap: 40px; }
+  .work-col-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .strength-grid { grid-template-columns: 1fr; }
+  .strength-card { padding: 32px 24px; }
+
+  .goal-inner { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+  .goal-title { font-size: 48px; }
+
+  .contact-wrap { padding: 60px 24px; }
+  .contact-wrap h2 { font-size: 52px; }
+  .contact-btns { flex-direction: column; align-items: center; }
+
+  footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px; }
+
+  .modal-box { width: 95%; }
+}
+
+@media (max-width: 480px) {
+  .hero-name { font-size: 52px; }
+  .work-col-grid { grid-template-columns: 1fr; }
+  .stat-num { font-size: 28px; }
+  .nav-menu { gap: 12px; }
+  .nav-menu a { font-size: 9px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  
+  <ul class="nav-menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">작업물</a></li>
+    <li><a href="#strength">강점</a></li>
+    <li><a href="#goal">비전</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="border-bottom:1px solid var(--line)">
+  <div class="hero-bg-text">DIRECTOR</div>
+
+  <div class="hero-label">2026 · Portfolio</div>
+
+  <h1 class="hero-name">
+    <em>정정현</em>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      영상을 기획하고, 촬영하고, 편집하고, 세상에 내보내는 것.<br>
+      그 모든 과정을 혼자 해본 사람입니다.<br>
+      <span style="color:var(--gold); font-size:12px;">유튜브 채널 다밍 ダミン 운영 · 그린컴퓨터 아카데미 수료</span>
+    </p>
+    <div class="hero-links">
+      <a href="https://youtube.com/@hi_dabaes" target="_blank" class="pill">YouTube ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="m-item">영상 기획 <span>✦</span></span>
+    <span class="m-item">촬영 & 편집 <span>✦</span></span>
+    <span class="m-item">Premiere Pro <span>✦</span></span>
+    <span class="m-item">After Effects <span>✦</span></span>
+    <span class="m-item">콘텐츠 기획 <span>✦</span></span>
+    <span class="m-item">유튜브 채널 운영 <span>✦</span></span>
+    <span class="m-item">현장형 제작 <span>✦</span></span>
+    <span class="m-item">예능 감각 <span>✦</span></span>
+    <span class="m-item">영상 기획 <span>✦</span></span>
+    <span class="m-item">촬영 & 편집 <span>✦</span></span>
+    <span class="m-item">Premiere Pro <span>✦</span></span>
+    <span class="m-item">After Effects <span>✦</span></span>
+    <span class="m-item">콘텐츠 기획 <span>✦</span></span>
+    <span class="m-item">유튜브 채널 운영 <span>✦</span></span>
+    <span class="m-item">현장형 제작 <span>✦</span></span>
+    <span class="m-item">예능 감각 <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-inner">
+    <div class="sec-label reveal">01 — About</div>
+
+    <div class="about-grid">
+      <div>
+        <div class="info-block reveal">
+          <h4>Profile</h4>
+          <p>이름: 정정현 (Jeong JeongHyeon)<br>E-Mail: jjhjhk2332@naver.com</p>
+        </div>
+
+        <div class="info-block reveal">
+          <h4>Education</h4>
+          <p>2021.03 – 2025.02 &nbsp;호남대학교 뷰티미용학과<br>2025.06 – 2025.11 &nbsp;그린컴퓨터 아카데미 수료 (생성형AI를 활용한 디지털문화콘텐츠제작)</p>
+        </div>
+
+        <div class="info-block reveal">
+          <h4>Skills</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Premiere Pro</span>
+            <span class="skill-tag">After Effects</span>
+            <span class="skill-tag">Photoshop</span>
+            <span class="skill-tag">Illustrator</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">생성형 AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="reveal">만드는 사람</h2>
+        <p class="reveal" style="margin-top:2rem;">영상을 보면서 "왜 이 장면이 재밌지?",<br>"이 컷은 왜 끊겼지?"를 분석합니다.<br><br>좋아서 시작했고, 하다 보니 더 잘하고 싶어졌습니다. 기획부터 촬영, 편집, 업로드까지 전 과정을 혼자 소화하며 콘텐츠 제작의 흐름을 몸으로 익혔습니다.<br><br>데이터를 보며 전략을 짜는 것도, 현장에서 직접 뛰는 것도 둘 다 좋아합니다. 영상 안에 담긴 사람의 반응과 감정을 포착하는 게 자연스러운 습관이 됐습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="sec-inner">
+    <div class="sec-label reveal">02 — 작업물</div>
+    <div class="work-split">
+      <!-- 왼쪽: 유튜브 영상 -->
+      <div class="work-col">
+        <div class="work-col-title reveal">YouTube</div>
+        <div class="work-col-grid">
+          <div class="work-card reveal">
+            <div class="work-thumb yt-thumb" data-video="Sg7Uo9H-_LU">
+              <img src="https://img.youtube.com/vi/Sg7Uo9H-_LU/hqdefault.jpg" alt="영상 001" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;">
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="work-info">
+              <div class="work-num">001</div>
+              <div class="work-meta">Premiere Pro · 오디오 편집 · 10일</div>
+            </div>
+          </div>
+          <div class="work-card reveal">
+            <div class="work-thumb yt-thumb" data-video="c6NopmH5UIU">
+              <img src="https://img.youtube.com/vi/c6NopmH5UIU/hqdefault.jpg" alt="영상 002" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;">
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="work-info">
+              <div class="work-num">002</div>
+              <div class="work-meta">Premiere Pro · 오디오 편집 · 7일</div>
+            </div>
+          </div>
+          <div class="work-card reveal">
+            <div class="work-thumb yt-thumb" data-video="4VCuuIlR8Xg">
+              <img src="https://img.youtube.com/vi/4VCuuIlR8Xg/hqdefault.jpg" alt="숏츠 003" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;">
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="work-info">
+              <div class="work-num">003 · Shorts</div>
+              <div class="work-meta">Premiere Pro</div>
+            </div>
+          </div>
+          <div class="work-card reveal">
+            <div class="work-thumb yt-thumb" data-video="RnATNKNuulU">
+              <img src="https://img.youtube.com/vi/RnATNKNuulU/hqdefault.jpg" alt="숏츠 004" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;">
+              <div class="play-btn">▶</div>
+            </div>
+            <div class="work-info">
+              <div class="work-num">004 · Shorts</div>
+              <div class="work-meta">Premiere Pro</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 일반 영상 -->
+      <div class="work-col">
+        <div class="work-col-title reveal">그 외 작업물</div>
+        <div class="work-col-grid">
+          <div class="work-card reveal">
+            <div class="work-thumb">
+              <video src="릴스.mp4" controls style="width:100%;height:100%;object-fit:cover;"></video>
+            </div>
+            <div class="work-info">
+              <div class="work-num">001</div>
+              <div class="work-title">인스타 릴스</div>
+              <div class="work-meta">Premiere Pro · 1일</div>
+            </div>
+          </div>
+          <div class="work-card reveal">
+            <div class="work-thumb">
+              <video src="엔딩_구독_좋아요_.mp4" controls style="width:100%;height:100%;object-fit:cover;"></video>
+            </div>
+            <div class="work-info">
+              <div class="work-num">002</div>
+              <div class="work-title">유튜브 엔딩 영상</div>
+              <div class="work-meta">After Effects · Illustrator · 1일</div>
+            </div>
+          </div>
+          <div class="work-card reveal">
+            <div class="work-thumb">
+              <video src="롬앤.mp4" controls style="width:100%;height:100%;object-fit:cover;"></video>
+            </div>
+            <div class="work-info">
+              <div class="work-num">003</div>
+              <div class="work-title">롬앤 제품 홍보 영상</div>
+              <div class="work-meta">After Effects · Photoshop · 1일</div>
+            </div>
+          </div>
+          <div class="work-card reveal">
+            <div class="work-thumb">
+              <video src="CJ_ONE.mp4" controls style="width:100%;height:100%;object-fit:cover;"></video>
+            </div>
+            <div class="work-info">
+              <div class="work-num">004</div>
+              <div class="work-title">CJ ONE 홍보 영상</div>
+              <div class="work-meta">After Effects · Illustrator · 1일</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNEL CARD (작업물 하단) -->
+<section style="border-bottom:1px solid var(--line);">
+  <div class="sec-inner" style="padding-top:60px; padding-bottom:60px;">
+    <!-- STAT CARDS -->
+    <div class="stat-row reveal">
+      <div class="stat-card">
+        <div class="stat-num">17<span class="stat-unit">편</span></div>
+        <div class="stat-desc">제작 영상</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6<span class="stat-unit">개월</span></div>
+        <div class="stat-desc">영상편집 전문교육</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100<span class="stat-unit">%</span></div>
+        <div class="stat-desc">기획·촬영·편집 직접</div>
+      </div>
+    </div>
+
+    <!-- CHANNEL CARD -->
+    <div class="channel-card reveal" id="channel" style="margin-top:2px;">
+      <div class="channel-header">
+        <div class="ch-info">
+          <div class="ch-avatar">🍋</div>
+          <div>
+            <div class="ch-name">다밍 ダミン</div>
+            <div class="ch-handle">youtube.com/@hi_dabaes</div>
+          </div>
+        </div>
+        <a href="https://youtube.com/@hi_dabaes" target="_blank" class="ch-link">채널 보기 ↗</a>
+      </div>
+      <div class="channel-body">
+        <p class="ch-desc">
+          유튜브 채널. 주제 선정부터 촬영 구성, 자막·색보정·사운드 편집, 썸네일 제작까지 전 과정을 단독으로 진행했습니다.<br>시청자의 반응을 보며 콘텐츠 방향을 조율하는 경험을 쌓았습니다.
+        </p>
+        <div class="ch-tags">
+          <span class="ch-tag">#영상편집</span>
+          <span class="ch-tag">#콘텐츠기획</span>
+          <span class="ch-tag">#유튜브</span>
+          <span class="ch-tag">#촬영</span>
+          <span class="ch-tag">#썸네일</span>
+          <span class="ch-tag">#영상기획</span>
+          <span class="ch-tag">#콘텐츠편집</span>
+          <span class="ch-tag">#오디오편집</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="strength">
+  <div class="sec-inner">
+    <div class="sec-label reveal">03 — 왜 저인가요</div>
+    <div class="strength-grid">
+      <div class="strength-card reveal">
+        <div class="s-icon">🎬</div>
+        <div class="s-title">기획부터 편집까지</div>
+        <p class="s-body">아이디어를 떠올리고, 구성안을 짜고, 현장에서 촬영하고, 마감까지 콘텐츠 제작의 전 사이클을 혼자 돌려본 경험이 있습니다. 어떤 역할이 어떻게 맞물리는지 몸으로 알고 있습니다.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="s-icon">👁️</div>
+        <div class="s-title">콘텐츠 분석 감각</div>
+        <p class="s-body">콘텐츠를 보면서 "왜 이 편집이 웃기지?", "이 타이밍이 왜 터지지?"를 분석하는 게 자연스러운 습관입니다. 잘 되는 콘텐츠의 구조를 읽을 줄 압니다.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="s-icon">🏃</div>
+        <div class="s-title">현장형 실행력</div>
+        <p class="s-body">현장에서 직접 뛰는 것도, 데이터를 보며 전략을 짜는 것도 둘 다 좋아합니다. 직접 카메라 들고 나가 촬영하고 편집해서 올리는 사이클을 반복해온 실행력이 있습니다.</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="s-icon">🛠️</div>
+        <div class="s-title">편집 툴 완전 숙지</div>
+        <p class="s-body">그린컴퓨터 아카데미 6개월 과정에서 Premiere Pro, After Effects, Photoshop 등을 체계적으로 익혔습니다. 이론이 아닌 실제 채널 운영에 직접 적용해본 실전 경험입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOAL -->
+<section id="goal" class="goal-section" style="border-bottom:1px solid var(--line)">
+  <div class="goal-inner">
+    <div>
+      <div class="goal-tag reveal">04 — 비전</div>
+      <h2 class="goal-title reveal">만들고<br>싶은<br>것들</h2>
+    </div>
+    <div>
+      <p class="goal-body reveal">
+        <strong>저는 좋은 콘텐츠를 만드는 팀에 합류하고 싶습니다.</strong><br><br>
+        영상을 만드는 게 좋고, 더 잘하고 싶어서 지금껏 혼자 기획하고 찍고 편집해왔습니다. 혼자 할 수 있는 건 해봤고, 이제는 함께 만들고 싶습니다.<br><br>
+        웃기고, 공감되고, 다음 편이 보고 싶어지는 콘텐츠. 그걸 같이 만들 수 있는 곳이라면 어디든 최선을 다하겠습니다.
+      </p>
+      <div class="goal-quote reveal">
+        "좋은 콘텐츠를 볼 때마다, 저도 저 안에 있고 싶다는 생각을 합니다. 함께 만들고 싶습니다."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="border-bottom:none">
+  <div class="contact-wrap">
+    <div class="sec-label reveal" style="justify-content:center; max-width:fit-content; margin: 0 auto 48px;">05 — Contact</div>
+    <h2 class="reveal">함께<br><em>만들어요</em></h2>
+    <p class="contact-sub reveal">영상 제작, 편집, 콘텐츠 기획 — 함께할 준비가 되어 있습니다.</p>
+    <div class="contact-btns reveal">
+      <a href="https://youtube.com/@hi_dabaes" target="_blank" class="btn primary">▶ 유튜브 채널</a>
+      <a href="mailto:jjhjhk2332@naver.com" class="btn">✉ 이메일</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Jeong JeongHyeon. All rights reserved.</p>
+  <p>jjhjhk2332@naver.com</p>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="videoModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <iframe id="modalIframe" src="" allowfullscreen allow="autoplay"></iframe>
+  </div>
+</div>
+
+<script>
+// Video Modal
+const modal = document.getElementById('videoModal');
+const iframe = document.getElementById('modalIframe');
+const closeBtn = document.getElementById('modalClose');
+
+document.querySelectorAll('.yt-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    const vid = el.getAttribute('data-video');
+    iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1`;
+    modal.classList.add('active');
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  modal.classList.remove('active');
+  iframe.src = '';
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+    iframe.src = '';
+  }
+});
+
+// Nav smooth scroll with offset for fixed nav
+document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+    }
+  });
+});
+
+// Custom cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX - 6 + 'px';
+  cursor.style.top  = e.clientY - 6 + 'px';
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
